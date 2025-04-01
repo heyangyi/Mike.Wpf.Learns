@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Prism.Mvvm;
 using Prism.Commands;
+using System.Windows;
 
 namespace Prism_Base.ViewModels
 {
@@ -15,16 +16,42 @@ namespace Prism_Base.ViewModels
     public class MainWindowViewModel : BindableBase
     {
         public DelegateCommand<string> NavigateCommand { get; private set; }
+        public DelegateCommand SwitchAccountCommand { get; private set; }
+
         private readonly IRegionManager _regionManager;
-        public MainWindowViewModel(IRegionManager regionManager)
+        private readonly IDialogService _dialogService;
+
+        public MainWindowViewModel(IRegionManager regionManager, IDialogService dialogService)
         {
             NavigateCommand = new DelegateCommand<string>(Navigate);
+            SwitchAccountCommand = new DelegateCommand(SwitchAccount);
+
             _regionManager = regionManager;
+            _dialogService = dialogService;
         }
 
         public void Navigate(string viewName)
         {
             _regionManager.RequestNavigate("ContentRegion", viewName);
+        }
+
+        public void SwitchAccount()
+        {
+            var parameters = new DialogParameters();
+            parameters.Add("param1", "value1");
+
+            _dialogService.Show("SwitchAccountDialogControl", parameters, result =>
+            {
+                if (result.Result == ButtonResult.OK)
+                {
+                    // 确定
+                    Application.Current.Shutdown();
+                }
+                else
+                {
+                    // 取消
+                }
+            });
         }
     }
 }

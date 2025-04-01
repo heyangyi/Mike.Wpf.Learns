@@ -16,6 +16,7 @@
             <Button Content="客户管理" Command="{Binding NavigateCommand}" CommandParameter="CustomerManagerControl"/>
             <Button Content="产品管理" Command="{Binding NavigateCommand}" CommandParameter="SkuManagerControl"/>
             <Button Content="系统设置" Command="{Binding NavigateCommand}" CommandParameter="SystemManagerControl"/>
+            <Button Content="切换账号" Command="{Binding SwitchAccountCommand}"/>
         </StackPanel>
         <ContentControl Grid.Row="1" prism:RegionManager.RegionName="ContentRegion"/>
     </Grid>

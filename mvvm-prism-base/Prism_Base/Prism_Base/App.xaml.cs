@@ -22,6 +22,8 @@ public partial class App : PrismApplication
         containerRegistry.RegisterForNavigation<CustomerManagerControl, CustomerManagerControlViewModel>();
         containerRegistry.RegisterForNavigation<SkuManagerControl, SkuManagerControlViewModel>();
         containerRegistry.RegisterForNavigation<SystemManagerControl, SystemManagerControlViewModel>();
+
+        containerRegistry.RegisterDialog<SwitchAccountDialogControl, SwitchAccountDialogControlViewModel>();
     }
 }
 
