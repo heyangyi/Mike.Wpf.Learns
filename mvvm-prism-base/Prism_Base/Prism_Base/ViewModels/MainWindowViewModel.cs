@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Prism.Mvvm;
 using Prism.Commands;
 using System.Windows;
+using Prism_Base.Events;
 
 namespace Prism_Base.ViewModels
 {
@@ -20,14 +21,22 @@ namespace Prism_Base.ViewModels
 
         private readonly IRegionManager _regionManager;
         private readonly IDialogService _dialogService;
+        private readonly IEventAggregator _eventAggregator;
 
-        public MainWindowViewModel(IRegionManager regionManager, IDialogService dialogService)
+        public MainWindowViewModel(IRegionManager regionManager, IDialogService dialogService, IEventAggregator eventAggregator)
         {
             NavigateCommand = new DelegateCommand<string>(Navigate);
             SwitchAccountCommand = new DelegateCommand(SwitchAccount);
 
             _regionManager = regionManager;
             _dialogService = dialogService;
+            _eventAggregator = eventAggregator;
+
+            //订阅添加客户通知
+            _eventAggregator.GetEvent<AddUserSuccessEvent>().Subscribe(arg =>
+            {
+                MessageBox.Show($"添加客户成功订阅，添加的新客户是：{arg.Name}");
+            }, ThreadOption.UIThread, keepSubscriberReferenceAlive: false);
         }
 
         public void Navigate(string viewName)
