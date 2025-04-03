@@ -86,7 +86,9 @@
                                 Width="36"
                                 Height="36"
                                 Source="/Images/user.png">
+                                <!--  图像剪辑或裁剪为圆  -->
                                 <Image.Clip>
+                                    <!--  定义一个椭圆或圆的几何形状  -->
                                     <EllipseGeometry
                                         Center="18,18"
                                         RadiusX="18"
