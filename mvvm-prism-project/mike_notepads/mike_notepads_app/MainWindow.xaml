@@ -5,8 +5,79 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:mike_notepads_app"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="450" Width="1080"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesign.Brush.Foreground}"
+        Background="{DynamicResource MaterialDesign.Brush.Background}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="{materialDesign:MaterialDesignFont}"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True">
 
-    </Grid>
+    <!--Window设置：-->
+    <!--隐藏白色的边：AllowsTransparency="True"-->
+    <!--居中显示：WindowStartupLocation="CenterScreen"-->
+    <!--去除窗口的边框、最大化、最小化、关闭按钮：WindowStyle="None"-->
+
+    <materialDesign:DialogHost DialogTheme="Inherit"
+                               Identifier="RootDialog"
+                               SnackbarMessageQueue="{Binding ElementName=MainSnackbar, Path=MessageQueue}">
+
+        <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+            <DockPanel>
+                <materialDesign:ColorZone Padding="16"
+                                          x:Name="colorZoneMaterialDesign"
+                                          materialDesign:ElevationAssist.Elevation="Dp4"
+                                          DockPanel.Dock="Top"
+                                          Mode="PrimaryMid">
+                    <DockPanel LastChildFill="False">
+                        <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                            <ToggleButton x:Name="MenuToggleButton"
+                                          AutomationProperties.Name="HamburgerToggleButton"
+                                          IsChecked="False"
+                                          Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
+
+                            <Button Margin="24,0,0,0"
+                                    Command="{Binding MovePrevCommand}"
+                                    Content="{materialDesign:PackIcon Kind=ArrowLeft,
+                                    Size=24}"
+                                    Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type FrameworkElement}}, Path=(TextElement.Foreground)}"
+                                    Style="{StaticResource MaterialDesignToolButton}"
+                                    ToolTip="Previous Item" />
+
+                            <Button Margin="16,0,0,0"
+                                    Command="{Binding MoveNextCommand}"
+                                    Content="{materialDesign:PackIcon Kind=ArrowRight,
+                                    Size=24}"
+                                    Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type FrameworkElement}}, Path=(TextElement.Foreground)}"
+                                    Style="{StaticResource MaterialDesignToolButton}"
+                                    ToolTip="Next Item" />
+
+                            <Button Margin="16,0,0,0"
+                                    Command="{Binding HomeCommand}"
+                                    Content="{materialDesign:PackIcon Kind=Home,Size=24}"
+                                    Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type FrameworkElement}}, Path=(TextElement.Foreground)}"
+                                    Style="{StaticResource MaterialDesignToolButton}"
+                                    ToolTip="Home" />
+
+                            <TextBlock Margin="16,0,0,0"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       AutomationProperties.Name="Material Design In XAML Toolkit"
+                                       FontSize="22"
+                                       Text="MIKE 记事本" />
+                        </StackPanel>
+
+                        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                            <Button x:Name="minBtn" Content="{materialDesign:PackIcon MinusThick}" Style="{StaticResource MaterialDesignFlatMidBgButton}"/>
+                            <Button x:Name="maxBtn" Content="{materialDesign:PackIcon CheckboxBlankOutline}" Style="{StaticResource MaterialDesignFlatMidBgButton}"/>
+                            <Button x:Name="closeBtn" Content="{materialDesign:PackIcon WindowClose}" Style="{StaticResource MaterialDesignFlatMidBgButton}"/>
+                        </StackPanel>
+                    </DockPanel>
+                </materialDesign:ColorZone>
+            </DockPanel>
+        </materialDesign:DrawerHost>
+    </materialDesign:DialogHost>
 </Window>
