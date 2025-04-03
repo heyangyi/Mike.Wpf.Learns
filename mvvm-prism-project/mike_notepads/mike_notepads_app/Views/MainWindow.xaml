@@ -23,14 +23,49 @@
     <!--  隐藏白色的边：AllowsTransparency="True"  -->
     <!--  居中显示：WindowStartupLocation="CenterScreen"  -->
     <!--  去除窗口的边框、最大化、最小化、关闭按钮：WindowStyle="None"  -->
-
     <materialDesign:DialogHost
         DialogTheme="Inherit"
         Identifier="RootDialog"
         SnackbarMessageQueue="{Binding ElementName=MainSnackbar, Path=MessageQueue}">
 
         <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+            <!--  左侧菜单栏  -->
+            <materialDesign:DrawerHost.LeftDrawerContent>
+                <DockPanel MinWidth="220" LastChildFill="True">
+                    <!--  菜单上部分  -->
+                    <StackPanel Margin="0,20" DockPanel.Dock="Top">
+                        <Image
+                            Width="50"
+                            Height="50"
+                            Source="/Images/user.png">
+                            <Image.Clip>
+                                <EllipseGeometry
+                                    Center="25,25"
+                                    RadiusX="25"
+                                    RadiusY="25" />
+                            </Image.Clip>
+                        </Image>
+                        <TextBlock
+                            Margin="0,15,0,10"
+                            HorizontalAlignment="Center"
+                            Text="清风徐来" />
+                    </StackPanel>
+                    <!--  菜单下部分  -->
+                    <ListBox ItemsSource="{Binding MenuBars}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Margin="10,0,10,0" Kind="{Binding Icon}" />
+                                    <TextBlock Text="{Binding Name}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DockPanel>
+            </materialDesign:DrawerHost.LeftDrawerContent>
+
             <DockPanel>
+                <!--  头部区域  -->
                 <materialDesign:ColorZone
                     x:Name="colorZoneMaterialDesign"
                     Padding="16"
