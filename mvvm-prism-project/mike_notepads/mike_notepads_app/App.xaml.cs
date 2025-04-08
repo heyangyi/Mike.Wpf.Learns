@@ -1,4 +1,5 @@
 ﻿using mike_notepads_app.ViewModels;
+using mike_notepads_app.Views;
 using System.Configuration;
 using System.Data;
 using System.Windows;
@@ -18,7 +19,12 @@ public partial class App : PrismApplication
 
     protected override void RegisterTypes(IContainerRegistry containerRegistry)
     {
+        containerRegistry.RegisterForNavigation<HomeView, HomeViewModel>();
         containerRegistry.RegisterForNavigation<MainWindow, MainWindowModel>();
+        containerRegistry.RegisterForNavigation<MemoView, MemoViewModel>();
+        containerRegistry.RegisterForNavigation<HomeView, HomeViewModel>();
+        containerRegistry.RegisterForNavigation<SettingView, SettingViewModel>();
+        containerRegistry.RegisterForNavigation<ToDoView, ToDoViewModel>();
     }
 }
 

@@ -53,5 +53,11 @@ public partial class MainWindow : Window
         {
             this.Close();
         };
+
+        this.menuBar.SelectionChanged += (s, e) =>
+        {
+            // 选中对应的内容
+            this.drawerHost.IsLeftDrawerOpen = false;
+        };
     }
 }
