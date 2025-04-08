@@ -54,6 +54,7 @@ public partial class MainWindow : Window
             this.Close();
         };
 
+        // 点击菜单项关闭左侧导航抽屉
         this.menuBar.SelectionChanged += (s, e) =>
         {
             // 选中对应的内容
