@@ -9,13 +9,13 @@ namespace mike_notepads_app.Comom.Models
 	/// <summary>
 	/// 系统导航菜单实体类
 	/// </summary>
-    public class MenuBar:BindableBase
-    {
+	public class MenuBar : BindableBase
+	{
 		private string name;
-        /// <summary>
-        /// 菜单名称
-        /// </summary>
-        public string Name
+		/// <summary>
+		/// 菜单名称
+		/// </summary>
+		public string Name
 		{
 			get { return name; }
 			set { name = value; }
@@ -32,10 +32,10 @@ namespace mike_notepads_app.Comom.Models
 		}
 
 		private string nameSpace;
-        /// <summary>
-        /// 菜单命名空间
-        /// </summary>
-        public string NameSpace
+		/// <summary>
+		/// 菜单命名空间
+		/// </summary>
+		public string NameSpace
 		{
 			get { return nameSpace; }
 			set { nameSpace = value; }
