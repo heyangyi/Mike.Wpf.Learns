@@ -4,16 +4,202 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:mike_notepads_app.Views"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <Grid>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <!--  第一行内容  -->
         <TextBlock
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            FontSize="24"
-            FontWeight="Bold"
-            Text="首页" />
+            Grid.Row="0"
+            Margin="10"
+            FontSize="22"
+            Text="你好Mike，今天是2025年4月12日，星期六" />
+        <!--  第二行内容  -->
+        <ItemsControl Grid.Row="1" ItemsSource="{Binding TaskBar}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="4" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border
+                        Margin="10"
+                        Background="{Binding Color}"
+                        CornerRadius="5">
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Effect">
+                                            <Setter.Value>
+                                                <DropShadowEffect
+                                                    BlurRadius="10"
+                                                    ShadowDepth="1"
+                                                    Color="#DDDDDD" />
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <Grid>
+                            <StackPanel Margin="15,10,0,0">
+                                <materialDesign:PackIcon
+                                    Width="30"
+                                    Height="30"
+                                    Kind="{Binding Icon}" />
+                                <TextBlock Margin="0,10,0,0" Text="{Binding Title}" />
+                                <TextBlock
+                                    FontSize="50"
+                                    FontWeight="Bold"
+                                    Text="{Binding Content}" />
+                            </StackPanel>
+                            <Canvas ClipToBounds="True">
+                                <Border
+                                    Canvas.Top="0"
+                                    Canvas.Right="-50"
+                                    Width="120"
+                                    Height="120"
+                                    Background="#FFFFFF"
+                                    CornerRadius="60"
+                                    Opacity="0.1" />
+                                <Border
+                                    Canvas.Top="80"
+                                    Canvas.Right="-30"
+                                    Width="120"
+                                    Height="120"
+                                    Background="#FFFFFF"
+                                    CornerRadius="60"
+                                    Opacity="0.1" />
+                            </Canvas>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <!--  第三行  -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Border
+                Grid.Column="0"
+                Margin="10"
+                Background="#FBFBFB"
+                CornerRadius="5"
+                Opacity="0.2" />
+
+            <DockPanel
+                Grid.Column="0"
+                Margin="15"
+                LastChildFill="True">
+                <DockPanel
+                    Margin="10"
+                    DockPanel.Dock="Top"
+                    LastChildFill="False">
+                    <TextBlock
+                        FontSize="18"
+                        FontWeight="Bold"
+                        Text="代办事项" />
+                    <Button
+                        Width="26"
+                        Height="26"
+                        VerticalAlignment="Top"
+                        DockPanel.Dock="Right"
+                        Style="{StaticResource MaterialDesignFloatingActionLightButton}">
+                        <materialDesign:PackIcon
+                            Width="18"
+                            Height="18"
+                            Kind="add" />
+                    </Button>
+                </DockPanel>
+                <ListBox
+                    HorizontalContentAlignment="Stretch"
+                    ItemsSource="{Binding ToDoList}"
+                    ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="60" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock
+                                        FontSize="16"
+                                        FontWeight="Bold"
+                                        Text="{Binding Title}" />
+                                    <TextBlock
+                                        Margin="0,5,0,0"
+                                        FontWeight="ExtraLight"
+                                        Text="{Binding Content}" />
+                                </StackPanel>
+                                <ToggleButton Grid.Column="1" HorizontalAlignment="Right" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
+
+
+            <Border
+                Grid.Column="1"
+                Margin="10"
+                Background="#FBFBFB"
+                CornerRadius="5"
+                Opacity="0.2" />
+            <DockPanel Grid.Column="1" Margin="15">
+                <DockPanel
+                    Margin="10"
+                    DockPanel.Dock="Top"
+                    LastChildFill="False">
+                    <TextBlock
+                        FontSize="18"
+                        FontWeight="Bold"
+                        Text="备忘录" />
+                    <Button
+                        Width="26"
+                        Height="26"
+                        VerticalAlignment="Top"
+                        DockPanel.Dock="Right"
+                        Style="{StaticResource MaterialDesignFloatingActionLightButton}">
+                        <materialDesign:PackIcon
+                            Width="18"
+                            Height="18"
+                            Kind="add" />
+                    </Button>
+                </DockPanel>
+                <ListBox
+                    HorizontalContentAlignment="Stretch"
+                    ItemsSource="{Binding ToDoList}"
+                    ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock
+                                    FontSize="16"
+                                    FontWeight="Bold"
+                                    Text="{Binding Title}" />
+                                <TextBlock
+                                    Margin="0,5,0,0"
+                                    FontWeight="ExtraLight"
+                                    Text="{Binding Content}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
+        </Grid>
     </Grid>
 </UserControl>
+

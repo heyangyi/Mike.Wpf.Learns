@@ -1,4 +1,5 @@
 ﻿using mike_notepads_app.Comom.Models;
+using mike_notepads_app.Comom.Models.MainWindow;
 using mike_notepads_app.Extensions;
 using System;
 using System.Collections.Generic;

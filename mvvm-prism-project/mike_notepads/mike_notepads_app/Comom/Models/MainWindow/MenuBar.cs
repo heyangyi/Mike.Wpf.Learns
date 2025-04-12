@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace mike_notepads_app.Comom.Models
+namespace mike_notepads_app.Comom.Models.MainWindow
 {
 	/// <summary>
 	/// 系统导航菜单实体类
