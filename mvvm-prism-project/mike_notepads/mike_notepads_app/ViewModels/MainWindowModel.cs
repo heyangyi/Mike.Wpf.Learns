@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 
 namespace mike_notepads_app.ViewModels
 {
@@ -35,9 +36,14 @@ namespace mike_notepads_app.ViewModels
         /// 前进命令
         /// </summary>
         public DelegateCommand GoForwardCommand { get; private set; }
+        /// <summary>
+        /// 点击首页
+        /// </summary>
+        public DelegateCommand GoHomeCommand { get; private set; }
 
         private IRegionManager _regionManager;
         private IRegionNavigationJournal _regionNavigationJournal;
+
         /// <summary>
         /// 依赖注入
         /// </summary>
@@ -49,6 +55,7 @@ namespace mike_notepads_app.ViewModels
             MenuNavigationCommand = new DelegateCommand<MenuBar>(MenuNavigation);
             GoBackCommand = new DelegateCommand(GoBack);
             GoForwardCommand = new DelegateCommand(GoForward);
+            GoHomeCommand = new DelegateCommand(GoHome);
 
             // 生成菜单
             CreateMenuBar();
@@ -103,6 +110,20 @@ namespace mike_notepads_app.ViewModels
             {
                 _regionNavigationJournal.GoForward();
             }
+        }
+
+        /// <summary>
+        /// 点击首页
+        /// </summary>
+        private void GoHome()
+        {
+            _regionManager.RequestNavigate(PrismManager.MainWindowContentRegionName, "HomeView", parameters =>
+            {
+                if (parameters.Success)
+                {
+                    _regionNavigationJournal = parameters.Context!.NavigationService.Journal;
+                }
+            });
         }
     }
 }
