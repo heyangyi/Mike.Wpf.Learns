@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace mike_notepads_app.Comom.Models.HomeView
+namespace mike_notepads_app.Comom.Models.Common
 {
 	public class ToDoItemDto : BindableBase
 	{
