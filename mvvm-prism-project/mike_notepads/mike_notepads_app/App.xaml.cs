@@ -1,5 +1,7 @@
 ﻿using mike_notepads_app.ViewModels;
+using mike_notepads_app.ViewModels.SettingView;
 using mike_notepads_app.Views;
+using mike_notepads_app.Views.SettingViews;
 using System.Configuration;
 using System.Data;
 using System.Windows;
@@ -19,11 +21,23 @@ public partial class App : PrismApplication
 
     protected override void RegisterTypes(IContainerRegistry containerRegistry)
     {
+        // 首页
         containerRegistry.RegisterForNavigation<HomeView, HomeViewModel>();
+        //主窗体
         containerRegistry.RegisterForNavigation<MainWindow, MainWindowModel>();
+        // 备忘录
         containerRegistry.RegisterForNavigation<MemoView, MemoViewModel>();
-        containerRegistry.RegisterForNavigation<HomeView, HomeViewModel>();
+
+        // 设置
         containerRegistry.RegisterForNavigation<SettingView, SettingViewModel>();
+        // - 关于
+        containerRegistry.RegisterForNavigation<AboutView, AboutViewModel>();
+        // - 个性化
+        containerRegistry.RegisterForNavigation<PersonalizeView, PersonalizeViewModel>();
+        // - 系统设置
+        containerRegistry.RegisterForNavigation<SystemSettingsView, SystemSettingsViewModel>();
+
+        // 待办事项
         containerRegistry.RegisterForNavigation<ToDoView, ToDoViewModel>();
     }
 }
