@@ -54,7 +54,10 @@
                             Text="清风徐来" />
                     </StackPanel>
                     <!--  菜单下部分  -->
-                    <ListBox x:Name="menuBar" ItemsSource="{Binding MenuBars}">
+                    <ListBox
+                        x:Name="menuBar"
+                        ItemsSource="{Binding MenuBars}"
+                        SelectedIndex="0">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
                                 <i:InvokeCommandAction Command="{Binding MenuNavigationCommand}" CommandParameter="{Binding ElementName=menuBar, Path=SelectedItem}" />

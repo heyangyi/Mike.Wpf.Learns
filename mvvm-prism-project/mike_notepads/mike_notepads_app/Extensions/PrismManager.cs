@@ -9,5 +9,6 @@ namespace mike_notepads_app.Extensions
     public static class PrismManager
     {
         public static readonly string MainWindowContentRegionName = "MainWindowContentRegion";
+        public static readonly string SettingViewContentRegionName = "SettingViewContentRegion";
     }
 }
