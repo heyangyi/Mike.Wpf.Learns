@@ -1,10 +1,19 @@
-﻿using mike_notepads_app.ViewModels;
+﻿using MaterialDesignColors;
+using MaterialDesignColors.ColorManipulation;
+using MaterialDesignThemes.Wpf;
+using mike_notepads_app.Comom.Models.AppConfig.Setting;
+using mike_notepads_app.Domain.Setting;
+using mike_notepads_app.ViewModels;
 using mike_notepads_app.ViewModels.SettingView;
 using mike_notepads_app.Views;
 using mike_notepads_app.Views.SettingViews;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Windows;
+using System.Windows.Media;
 
 namespace mike_notepads_app;
 
@@ -15,6 +24,9 @@ public partial class App : PrismApplication
 {
     protected override Window CreateShell()
     {
+        // 设置主题
+        ThemeSettingHandle.SetTheme();
+
         // 返回一个窗体，从容器中解析
         return Container.Resolve<MainWindow>();
     }

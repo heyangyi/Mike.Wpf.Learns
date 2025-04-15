@@ -1,13 +1,10 @@
 ﻿using MaterialDesignColors;
 using MaterialDesignColors.ColorManipulation;
 using MaterialDesignThemes.Wpf;
-using mike_notepads_app.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using mike_notepads_app.Comom.Models.AppConfig.Setting;
+using mike_notepads_app.Domain.Setting;
+using Newtonsoft.Json;
+using System.IO;
 using System.Windows.Media;
 
 namespace mike_notepads_app.ViewModels.SettingView
@@ -31,23 +28,18 @@ namespace mike_notepads_app.ViewModels.SettingView
                 }
             }
         }
+        private Color? Color { get; set; }
 
         public PersonalizeViewModel()
         {
             ChangeHueCommand = new DelegateCommand<object>(ChangeHue);
             Theme theme = _paletteHelper.GetTheme();
             var baseTheme = theme.GetBaseTheme();
-            if (baseTheme == BaseTheme.Dark)
-            {
-                IsDarkTheme = true;
-            }
-            else
-            {
-                IsDarkTheme = false;
-            }
+            IsDarkTheme = baseTheme == BaseTheme.Dark;
+            Color = theme.PrimaryMid.Color;
         }
 
-        private void ChangeHue(object? obj)
+        void ChangeHue(object? obj)
         {
             var hue = (System.Windows.Media.Color)obj!;
 
@@ -58,9 +50,11 @@ namespace mike_notepads_app.ViewModels.SettingView
             theme.PrimaryDark = new ColorPair(hue.Darken());
 
             _paletteHelper.SetTheme(theme);
+            Color = hue;
+            ThemeSettingHandle.SaveThemeSetting(IsDarkTheme, hue);
         }
 
-        private static void ModifyTheme(Action<Theme> modificationAction)
+        void ModifyTheme(Action<Theme> modificationAction)
         {
             var paletteHelper = new PaletteHelper();
             Theme theme = paletteHelper.GetTheme();
@@ -68,6 +62,7 @@ namespace mike_notepads_app.ViewModels.SettingView
             modificationAction?.Invoke(theme);
 
             paletteHelper.SetTheme(theme);
+            ThemeSettingHandle.SaveThemeSetting(IsDarkTheme, Color);
         }
     }
 }
