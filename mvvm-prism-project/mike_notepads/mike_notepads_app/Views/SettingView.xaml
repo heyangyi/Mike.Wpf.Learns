@@ -44,6 +44,7 @@
             Grid.Column="0"
             Width="200"
             Margin="0,20,5,0"
+            ItemContainerStyle="{StaticResource MyListBoxItemStyle}"
             ItemsSource="{Binding MenuBars}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
@@ -52,9 +53,12 @@
             </i:Interaction.Triggers>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Margin="10,0,10,0" Kind="{Binding Icon}" />
-                        <TextBlock Text="{Binding Name}" />
+                    <StackPanel Background="Transparent" Orientation="Horizontal">
+                        <materialDesign:PackIcon
+                            Margin="10,0,10,0"
+                            VerticalAlignment="Center"
+                            Kind="{Binding Icon}" />
+                        <TextBlock VerticalAlignment="Center" Text="{Binding Name}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

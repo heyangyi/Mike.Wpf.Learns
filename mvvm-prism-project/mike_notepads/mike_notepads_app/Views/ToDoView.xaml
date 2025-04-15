@@ -146,8 +146,9 @@
                                         </md:PopupBox>
                                         <Border
                                             Grid.RowSpan="2"
-                                            Background="ForestGreen"
-                                            CornerRadius="5" />
+                                            Background="{DynamicResource MaterialDesign.Brush.Primary}"
+                                            CornerRadius="5"
+                                            Opacity="0.4" />
                                         <TextBlock
                                             Grid.Row="0"
                                             Margin="8"

@@ -14,6 +14,35 @@
                     SecondaryColor="Lime" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign3.Defaults.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="MyListBoxItemStyle" TargetType="ListBoxItem">
+                <Setter Property="MinHeight" Value="40" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                            <Grid Margin="4,1,6,1">
+                                <Border
+                                    x:Name="borderHeader"
+                                    CornerRadius="4"
+                                    Opacity="0.6" />
+                                <Border x:Name="border" />
+                                <ContentPresenter HorizontalAlignment="{Binding HorizontalAlignment}" VerticalAlignment="{Binding VerticalAlignment}" />
+                            </Grid>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter TargetName="borderHeader" Property="BorderThickness" Value="4,0,0,0" />
+                                    <Setter TargetName="borderHeader" Property="Background" Value="{DynamicResource MaterialDesign.Brush.Primary}" />
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="borderHeader" Property="BorderThickness" Value="4,0,0,0" />
+                                    <Setter TargetName="borderHeader" Property="Background" Value="{DynamicResource MaterialDesign.Brush.Primary}" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </prism:PrismApplication>
