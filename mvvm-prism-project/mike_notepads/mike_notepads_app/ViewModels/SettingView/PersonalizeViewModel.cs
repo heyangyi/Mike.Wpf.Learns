@@ -35,6 +35,16 @@ namespace mike_notepads_app.ViewModels.SettingView
         public PersonalizeViewModel()
         {
             ChangeHueCommand = new DelegateCommand<object>(ChangeHue);
+            Theme theme = _paletteHelper.GetTheme();
+            var baseTheme = theme.GetBaseTheme();
+            if (baseTheme == BaseTheme.Dark)
+            {
+                IsDarkTheme = true;
+            }
+            else
+            {
+                IsDarkTheme = false;
+            }
         }
 
         private void ChangeHue(object? obj)
