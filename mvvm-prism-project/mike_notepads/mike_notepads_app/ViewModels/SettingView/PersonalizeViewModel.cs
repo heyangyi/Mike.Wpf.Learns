@@ -28,7 +28,6 @@ namespace mike_notepads_app.ViewModels.SettingView
                 }
             }
         }
-        private Color? Color { get; set; }
 
         public PersonalizeViewModel()
         {
@@ -36,7 +35,6 @@ namespace mike_notepads_app.ViewModels.SettingView
             Theme theme = _paletteHelper.GetTheme();
             var baseTheme = theme.GetBaseTheme();
             IsDarkTheme = baseTheme == BaseTheme.Dark;
-            Color = theme.PrimaryMid.Color;
         }
 
         void ChangeHue(object? obj)
@@ -50,8 +48,7 @@ namespace mike_notepads_app.ViewModels.SettingView
             theme.PrimaryDark = new ColorPair(hue.Darken());
 
             _paletteHelper.SetTheme(theme);
-            Color = hue;
-            ThemeSettingHandle.SaveThemeSetting(IsDarkTheme, hue);
+            ThemeSettingHandle.SaveThemeSetting(theme);
         }
 
         void ModifyTheme(Action<Theme> modificationAction)
@@ -62,7 +59,7 @@ namespace mike_notepads_app.ViewModels.SettingView
             modificationAction?.Invoke(theme);
 
             paletteHelper.SetTheme(theme);
-            ThemeSettingHandle.SaveThemeSetting(IsDarkTheme, Color);
+            ThemeSettingHandle.SaveThemeSetting(theme);
         }
     }
 }

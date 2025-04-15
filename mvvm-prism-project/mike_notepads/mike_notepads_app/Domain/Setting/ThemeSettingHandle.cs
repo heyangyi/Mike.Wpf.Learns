@@ -10,12 +10,12 @@ namespace mike_notepads_app.Domain.Setting
 {
     public static class ThemeSettingHandle
     {
-        public static void SaveThemeSetting(bool isDarkTheme,Color? color)
+        public static void SaveThemeSetting(Theme theme)
         {
             var json = JsonConvert.SerializeObject(new ThemeModel()
             {
-                IsDarkTheme = isDarkTheme,
-                Color = color
+                IsDarkTheme = theme.GetBaseTheme() == BaseTheme.Dark,
+                Color = theme.PrimaryMid.Color
             });
             var themeFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "AppConfig", "Setting", "theme.json");
             Directory.CreateDirectory(Path.GetDirectoryName(themeFilePath)!);
