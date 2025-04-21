@@ -1,10 +1,12 @@
-﻿using mike_notepads_app.Comom.Models;
+﻿using mike_notepads_app.Comom;
+using mike_notepads_app.Comom.Models;
 using mike_notepads_app.Comom.Models.MainWindow;
 using mike_notepads_app.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
@@ -12,9 +14,9 @@ using System.Windows.Controls.Primitives;
 
 namespace mike_notepads_app.ViewModels
 {
-    public class MainWindowModel : BindableBase
+    public class MainWindowModel : BindableBase, IConfigureService
     {
-        private ObservableCollection<MenuBar> menuBars = new ObservableCollection<MenuBar>();
+        private ObservableCollection<MenuBar> menuBars;
         /// <summary>
         /// 菜单集合
         /// </summary>
@@ -57,8 +59,7 @@ namespace mike_notepads_app.ViewModels
             GoForwardCommand = new DelegateCommand(GoForward);
             GoHomeCommand = new DelegateCommand(GoHome);
 
-            // 生成菜单
-            CreateMenuBar();
+            MenuBars = new ObservableCollection<MenuBar>();
         }
 
         /// <summary>
@@ -78,8 +79,7 @@ namespace mike_notepads_app.ViewModels
         /// <param name="menuBar"></param>
         private void MenuNavigation(MenuBar menuBar)
         {
-            if (menuBar == null || string.IsNullOrWhiteSpace(menuBar.NameSpace))
-                return;
+            if (menuBar == null) return;
 
             _regionManager.RequestNavigate(PrismManager.MainWindowContentRegionName, menuBar.NameSpace, parameters =>
             {
@@ -124,6 +124,13 @@ namespace mike_notepads_app.ViewModels
                     _regionNavigationJournal = parameters.Context!.NavigationService.Journal;
                 }
             });
+        }
+
+        public void ConfigMenu()
+        {
+            // 生成菜单
+            CreateMenuBar();
+            GoHome();
         }
     }
 }

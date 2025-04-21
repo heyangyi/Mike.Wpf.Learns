@@ -57,8 +57,7 @@
                     <ListBox
                         x:Name="menuBar"
                         ItemContainerStyle="{StaticResource MyListBoxItemStyle}"
-                        ItemsSource="{Binding MenuBars}"
-                        SelectedIndex="0">
+                        ItemsSource="{Binding MenuBars}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
                                 <i:InvokeCommandAction Command="{Binding MenuNavigationCommand}" CommandParameter="{Binding ElementName=menuBar, Path=SelectedItem}" />

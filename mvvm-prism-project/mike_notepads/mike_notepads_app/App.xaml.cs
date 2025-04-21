@@ -1,6 +1,7 @@
 ﻿using MaterialDesignColors;
 using MaterialDesignColors.ColorManipulation;
 using MaterialDesignThemes.Wpf;
+using mike_notepads_app.Comom;
 using mike_notepads_app.Comom.Models.AppConfig.Setting;
 using mike_notepads_app.Domain.Setting;
 using mike_notepads_app.ViewModels;
@@ -31,10 +32,32 @@ public partial class App : PrismApplication
         return Container.Resolve<MainWindow>();
     }
 
+    protected override void OnInitialized()
+    {
+        //var dialogService = Container.Resolve<IDialogService>();
+        //dialogService.ShowDialog("LoginView", callback =>
+        //{
+        //    if (callback.Result == ButtonResult.OK)
+        //    {
+        var service = App.Current.MainWindow.DataContext as IConfigureService;
+        if (service != null)
+            service.ConfigMenu();
+
+        base.OnInitialized();
+        //    }
+        //    else
+        //    {
+        //        Application.Current.Shutdown();
+        //    }
+        //});
+    }
+
     protected override void RegisterTypes(IContainerRegistry containerRegistry)
     {
         // 首页
         containerRegistry.RegisterForNavigation<HomeView, HomeViewModel>();
+        // 登录
+        containerRegistry.RegisterDialog<LoginView, LoginViewModel>();
         //主窗体
         containerRegistry.RegisterForNavigation<MainWindow, MainWindowModel>();
         // 备忘录
